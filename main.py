@@ -10,12 +10,22 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import nltk
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 nltk.download('stopwords')
 nltk.download('wordnet')
 
 # Initialize FastAPI
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 # Define input data model
 class ReviewInput(BaseModel):
